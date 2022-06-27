@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes%2CURLSearchParams%2CCustomEvent%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.some%2CArray.prototype.find%2CArray.prototype.reduce%2CObject.assign%2CArray.isArray%2CObject.values%2CObject.entries%2CArray.from%2CSet%2CArray.prototype.findIndex"></script>
+        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes%2CURLSearchParams%2CCustomEvent%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.some%2CArray.prototype.find%2CArray.prototype.reduce%2CObject.assign%2CArray.isArray%2CObject.values%2CArray.from%2CSet%2CArray.prototype.findIndex"></script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.15.0/js/canvas-to-blob.min.js"></script>
 
         <script>
@@ -11,7 +11,7 @@
 var opensdg = {
 
   // A base URL for asynchronous calls to SDG data.
-  remoteDataBaseUrl: 'https://open-sdg.org/open-sdg-data-starter/en',
+  remoteDataBaseUrl: 'https://brockfanning.github.io/sdg-data-rwanda-demo/en',
 
   chartConfigAlterations: [],
   // A hook which can be used to modify the configuration for Chart.js.
@@ -40,6 +40,10 @@ var opensdg = {
 
   language: 'en',
 };
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
 
 </script>
 
@@ -99,7 +103,7 @@ var translations = {
         ================================================== -->
 
         
-    <title>Reporting status - Indicators For The Sustainable Development Goals</title>
+    <title>Indicators For The Sustainable Development Goals</title>
 
 
 
@@ -114,31 +118,26 @@ var translations = {
         <script src="/sdg-site-rwanda-demo/assets/js/lib/classList.js"></script>
         <![endif]-->
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/sdg-site-rwanda-demo/assets/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/sdg-site-rwanda-demo/assets/img/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/sdg-site-rwanda-demo/assets/img/favicons/favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="/sdg-site-rwanda-demo/assets/img/favicons/favicon.ico" />
-
+        <!-- Favicons ================================================== -->
+        <!-- 128x128 -->
+        <link rel="shortcut icon" type="image/ico" href="/sdg-site-rwanda-demo/assets/img/favicons/favicon.ico">
+        <link rel="icon" type="image/png" href="/sdg-site-rwanda-demo/assets/img/favicons/favicon.png"><!-- 192x192, as recommended for Android
+        http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
+        -->
 
         
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link res="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/sdg-site-rwanda-demo/assets/css/style.css?v=20220627091443">
+        <link rel="stylesheet" href="/sdg-site-rwanda-demo/assets/css/style.css?v=20220627093401">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
           crossorigin=""/>
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"  crossorigin=""/>
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'  crossorigin=""/>
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css"  crossorigin=""/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin="">
-        <link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7/klaro.min.css" crossorigin=""/>
-        
-
-        <!--[if IE]>
-        <link rel="stylesheet" href="/sdg-site-rwanda-demo/assets/css/ie.css">
-        <![endif]-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><!-- ShareThis BEGIN --><!-- ShareThis END -->
 
         
 
@@ -148,104 +147,193 @@ layout-reportingstatus
 ">
 <!-- <div class="container"> -->
 
-<script>translations['header'] = {"alpha":"Alpha","default_contrast":"Default contrast","disable_high_contrast":"Disable high contrast","disclaimer":"This is a development website. We welcome your <a href=\"mailto:%email_contacts.suggestions\">feedback</a>.","enable_high_contrast":"Enable high contrast","high_contrast":"High contrast","internet_explorer_message":"We have detected that you are using Internet Explorer to visit this website. Internet Explorer is now being phased out by Microsoft. As a result, this website no longer supports any version of Internet Explorer. Some features on this site will not work. You should use a modern browser such as Edge, Chrome, Firefox, or Safari. If you have difficulty installing or accessing a different browser, please contact your IT support team.","internet_explorer_message_title":"This internet browser is no longer supported","skip_link":"Skip to main content","tag_line":"17 Goals to Transform our World","toggle_menu":"Menu toggle. Click to expand or collapse the menu.","toggle_search":"Search toggle. Click to expand or collapse the search bar."};</script>
 
-<a class="sr-only-focusable" id="skiplink" href="#main-content" tabindex="0">Skip to main content</a>
-<div class="container internet-explorer-message">
-    <h2 class="internet-explorer-message-title">This internet browser is no longer supported</h2>
-    <p class="internet-explorer-message-body">We have detected that you are using Internet Explorer to visit this website. Internet Explorer is now being phased out by Microsoft. As a result, this website no longer supports any version of Internet Explorer. Some features on this site will not work. You should use a modern browser such as Edge, Chrome, Firefox, or Safari. If you have difficulty installing or accessing a different browser, please contact your IT support team.</p>
-</div>
+<script>translations['header'] = {"alpha":"Alpha","default_contrast":"Default contrast","disable_high_contrast":"Disable high contrast","disclaimer":"This is a development website. We welcome your <a href=\"mailto:%email_address\">feedback</a>.","enable_high_contrast":"Enable high contrast","high_contrast":"High contrast","skip_link":"Skip to main content","tag_line":"17 Goals to Transform our World","toggle_menu":"Menu toggle. Click to expand or collapse the menu.","toggle_search":"Search toggle. Click to expand or collapse the search bar."};</script>
+
+<a class="sr-only sr-only-focusable" id="skiplink" href="#main-content" tabindex="0">Skip to main content</a>
 <div id="disclaimer">
-    
-<div class="container">
+  <div class="container">
   <div class="disclaimer-alert">
     <strong class="phase-tag">Alpha</strong>
     
-    This is a development website. We welcome your <a href="mailto:test@example.com">feedback</a>.
-    
+    This is a development website. We welcome your <a href="mailto:info@statistics.gov.rw">feedback</a>.
   </div>
 </div>
 
 </div>
 
-<header role="banner" class="">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light flex-wrap align-items-start">
-            <a class="navbar-brand" href="/sdg-site-rwanda-demo/" id="home">
+<header role="banner" class="header-menu-left-aligned">
+  <div class="container">
+
+    <div class="logo-and-mobile-widgets">
+      <a class="navbar-brand" href="/sdg-site-rwanda-demo/" id="home">
     <img src="/sdg-site-rwanda-demo/assets/img/SDG_logo.png" alt="Sustainable Development Goals - 17 Goals to Transform our World" />
 </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="d-flex flex-wrap w-100 justify-content-between">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav" id="menu"><li class="nav-item ">
-    <a class="nav-link" href="/sdg-site-rwanda-demo/goals">Goals</a>
-</li><li class="nav-item active">
-    <a class="nav-link" href="/sdg-site-rwanda-demo/reporting-status">Reporting Status</a>
-</li><li class="nav-item ">
-    <a class="nav-link" href="/sdg-site-rwanda-demo/about">About</a>
-</li><li class="nav-item ">
-    <a class="nav-link" href="/sdg-site-rwanda-demo/faq">FAQ</a>
-</li><li class="nav-item ">
-    <a class="nav-link" href="/sdg-site-rwanda-demo/news">Updates</a>
-</li></ul>
-    
-                </div>
-                <div class="header-search-bar">
-                    <form class="align-self-lg-end" id="search" action="/sdg-site-rwanda-demo/search/">
-    <div class="input-group">
-        <label class="visually-hidden" for="indicator_search">Search</label>
-        <input class="form-control" type="search" name="q" id="indicator_search" title="Search">
-        <span class="input-group-append">
-            <button class="btn btn-outline-secondary ms-n5" aria-label="Search" id="search-btn" type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</form>
+      <div class="mobile-widgets">
+    <ul id='accessibility-nav' class='contrast-switcher'>
+        
 
-                </div>
-                <div class="header-toggles d-flex">
+    <li class="nav-link contrast contrast-default contrast-type-default">
+        <a title="Disable high contrast"
+           aria-label="Disable high contrast"
+           data-contrast-switch-to="default"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="default"
 
-
-
-
-
-  <div class="language-toggle-container">
-  
-  <div class="btn-group language-toggle-dropdown  dropdown">
-    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fa fa-globe"></i>
-      English
-    </button>
-    <ul class="dropdown-menu"><li>
-            <a class="dropdown-item" href="/sdg-site-rwanda-demo/es/reporting-status/">
-              Español
-            </a>
-          </li></ul>
-  </div>
-</div>
-
-
-
-                    <span class="no-js-language-toggle"><div class="language-toggle-container d-flex">
-    <i class="fa fa-globe language-toggle-globe-links"></i>
-    <ul class="language-toggle-links list-unstyled list-inline"><li class="language-option-es list-inline-item">
-            <a class="language-toggle-link" href="/sdg-site-rwanda-demo/es/reporting-status/">
-                Español
-            </a>
-        </li></ul>
-</div></span><a title="Enable high contrast" aria-label="Enable high contrast"
-    data-contrast-switch-to="" href="javascript:void(0)" data-on="click"
+        >A</a>
+    </li>
+    <li class="nav-link contrast contrast-high contrast-type-default">
+        <a title="Enable high contrast"
+           aria-label="Enable high contrast"
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
 data-event-category="Accessibility"
 data-event-action="Change contrast setting"
 data-event-label="high"
->A</a>
-                </div>
-            </div>
-        </nav>
+
+        >A</a>
+    </li>
+
+
+    </ul></div>
     </div>
+
+    <div class="search-and-desktop-widgets">
+      <div id="search" class="menu-target">
+  <form action="/sdg-site-rwanda-demo/search/">
+    <label class="sr-only" for="indicator_search">Search</label>
+    <input type="text" name="q" id="indicator_search" title="Search" /><!--
+    --><button aria-label="Search" id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="false"></i></button>
+  </form>
+</div>
+
+      <div class="navbar navbar-default widgets-without-menu">
+        <ul class="nav navbar-nav contrast-switcher">
+
+    <li class="nav-link contrast contrast-default contrast-type-default">
+        <a title="Disable high contrast"
+           aria-label="Disable high contrast"
+           data-contrast-switch-to="default"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="default"
+
+        >A</a>
+    </li>
+    <li class="nav-link contrast contrast-high contrast-type-default">
+        <a title="Enable high contrast"
+           aria-label="Enable high contrast"
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="high"
+
+        >A</a>
+    </li>
+
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="navbar navbar-default menu-without-widgets" id="main-nav">
+      <ul class="top-level">
+    <li id="menuToggle"
+        aria-label="Menu toggle. Click to expand or collapse the menu."
+        aria-haspopup="true">
+        <button data-target="menu-mobile" aria-expanded="false">Menu</button>
+        <ul class="nav navbar-nav menu-target contrast-switcher" id="menu-mobile"><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/">Goals</a>
+</li><li class="nav-link active">
+    <a href="/sdg-site-rwanda-demo/reporting-status/">Reporting Status</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/about/">About</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/publications/">Publications</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/guidance/">Guidance</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/faq/">FAQ</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/NST1-indicators-list/">NST1 Indicators</a>
+</li>
+
+
+
+    <li class="nav-link contrast contrast-default contrast-type-default">
+        <a title="Disable high contrast"
+           aria-label="Disable high contrast"
+           data-contrast-switch-to="default"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="default"
+
+        >A</a>
+    </li>
+    <li class="nav-link contrast contrast-high contrast-type-default">
+        <a title="Enable high contrast"
+           aria-label="Enable high contrast"
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="high"
+
+        >A</a>
+    </li>
+
+
+
+</ul>
+
+    </li>
+    <li id="searchToggle"
+        aria-label="Search toggle. Click to expand or collapse the search bar."
+        aria-haspopup="true">
+        <button data-target="search-mobile" aria-expanded="false">Search</button>
+        <div id="search-mobile" class="menu-target">
+  <form action="/sdg-site-rwanda-demo/search/">
+    <label class="sr-only" for="indicator_search-mobile">Search</label>
+    <input type="text" name="q" id="indicator_search-mobile" title="Search" /><!--
+    --><button aria-label="Search" id="search-mobile-btn" type="submit"><i class="fa fa-search" aria-hidden="false"></i></button>
+  </form>
+</div>
+
+    </li>
+</ul>
+      <ul class="nav navbar-nav menu-target " id="menu"><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/">Goals</a>
+</li><li class="nav-link active">
+    <a href="/sdg-site-rwanda-demo/reporting-status/">Reporting Status</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/about/">About</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/publications/">Publications</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/guidance/">Guidance</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/faq/">FAQ</a>
+</li><li class="nav-link ">
+    <a href="/sdg-site-rwanda-demo/NST1-indicators-list/">NST1 Indicators</a>
+</li>
+
+</ul>
+
+    </div>
+
+  </div>
+
 </header>
 <div id="top" tabindex=-1></div>
 
@@ -257,16 +345,8 @@ data-event-label="high"
 
 
 
-<div class="container">
-  <nav>
-    <ol aria-label="breadcrumb" class="breadcrumb" style="--bs-breadcrumb-divider: '&rsaquo;';">
-        <li class="breadcrumb-item" >
-            <a href="/sdg-site-rwanda-demo/">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Reporting status</li>
-    </ol>
-</nav>
-</div>
+
+
 <div id="main-content" class="container reportingstatus" role="main">
 
   <h1>
@@ -276,14 +356,8 @@ data-event-label="high"
 </h1>
 
 
-<div class="reporting-status-description">
-  <p>Reporting status provides an overview of how much Sustainable Development Goal (SDG) data Australia reports.</p>
-
-</div>
 
 
-
-  <div>
   
 
   
@@ -292,27 +366,27 @@ data-event-label="high"
         <h2 class="status-goal">
             Overall reporting status
         </h2>
-        <span class="total"><span>248</span> indicators</span>
+        <span class="total"><span>244</span> indicators</span>
         <div class="summary">
-            <div class="statuses">
-            
-            <div>
-                <span class="status notstarted"><span class="status-inner">248</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-            </div>
-            
-            
-            <br style="clear:both;">
+            <div class="statuses"><div>
+                <span class="status complete"><span class="status-inner">113</span></span><strong>Reported online</strong><span class="value">46%</span>
+            </div><div>
+                <span class="status notstarted"><span class="status-inner">98</span></span><strong>Exploring data sources</strong><span class="value">40%</span>
+            </div><div>
+                <span class="status notapplicable"><span class="status-inner">33</span></span><strong>Not applicable</strong><span class="value">14%</span>
+            </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
             
             
+            <span class="complete" style="width:46.31147540983606%" title="Reported online: 46%"></span>
             
             
-            <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+            <span class="notstarted" style="width:40.16393442622951%" title="Exploring data sources: 40%"></span>
             
             
-            </div>
+            <span class="notapplicable" style="width:13.524590163934427%" title="Not applicable: 14%"></span></div>
     </div>
     <br style="clear:both;">
 </div>
@@ -326,27 +400,27 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/1">No poverty</a>
         </h3>
-        <span class="total">13 indicators</span>
+        <span class="total">14 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">13</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">10</span></span><strong>Reported online</strong><span class="value">71%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">4</span></span><strong>Exploring data sources</strong><span class="value">29%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">0</span></span><strong>Not applicable</strong><span class="value">0%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:71.42857142857143%" title="Reported online: 71%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:28.57142857142857%" title="Exploring data sources: 29%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:0.0%" title="Not applicable: 0%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -360,27 +434,27 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/2">Zero hunger</a>
         </h3>
-        <span class="total">14 indicators</span>
+        <span class="total">13 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">14</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">4</span></span><strong>Reported online</strong><span class="value">31%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">8</span></span><strong>Exploring data sources</strong><span class="value">62%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">8%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:30.76923076923077%" title="Reported online: 31%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:61.53846153846154%" title="Exploring data sources: 62%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:7.692307692307693%" title="Not applicable: 8%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -394,27 +468,27 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/3">Good health and well-being</a>
         </h3>
-        <span class="total">28 indicators</span>
+        <span class="total">27 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">28</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">15</span></span><strong>Reported online</strong><span class="value">56%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">11</span></span><strong>Exploring data sources</strong><span class="value">41%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">4%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:55.55555555555556%" title="Reported online: 56%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:40.74074074074074%" title="Exploring data sources: 41%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:3.7037037037037037%" title="Not applicable: 4%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -428,27 +502,27 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/4">Quality education</a>
         </h3>
-        <span class="total">12 indicators</span>
+        <span class="total">11 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">12</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">9</span></span><strong>Reported online</strong><span class="value">82%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">1</span></span><strong>Exploring data sources</strong><span class="value">9%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">9%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:81.81818181818181%" title="Reported online: 82%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:9.090909090909092%" title="Exploring data sources: 9%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:9.090909090909092%" title="Not applicable: 9%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -464,25 +538,25 @@ data-event-label="high"
         </h3>
         <span class="total">14 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">14</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">12</span></span><strong>Reported online</strong><span class="value">86%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">1</span></span><strong>Exploring data sources</strong><span class="value">7%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">7%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:85.71428571428571%" title="Reported online: 86%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:7.142857142857142%" title="Exploring data sources: 7%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:7.142857142857142%" title="Not applicable: 7%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -498,25 +572,25 @@ data-event-label="high"
         </h3>
         <span class="total">11 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">11</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">4</span></span><strong>Reported online</strong><span class="value">36%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">6</span></span><strong>Exploring data sources</strong><span class="value">55%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">9%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:36.36363636363637%" title="Reported online: 36%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:54.54545454545454%" title="Exploring data sources: 55%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:9.090909090909092%" title="Not applicable: 9%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -532,59 +606,59 @@ data-event-label="high"
         </h3>
         <span class="total">6 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">6</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">3</span></span><strong>Reported online</strong><span class="value">50%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">2</span></span><strong>Exploring data sources</strong><span class="value">33%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">17%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:50.0%" title="Reported online: 50%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:33.33333333333333%" title="Exploring data sources: 33%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:16.666666666666664%" title="Not applicable: 17%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
 </div><div class="goal reporting-status-item">
     <div class="frame goal-tiles">
         <a href="/sdg-site-rwanda-demo/8">
-        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/8.png" alt="Decent work and economic growth - Goal 8" width="100" height="100" class="goal-icon-8 goal-icon-image goal-icon-image-"/>
+        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/8.png" alt="Decent jobs and economic growth - Goal 8" width="100" height="100" class="goal-icon-8 goal-icon-image goal-icon-image-"/>
         </a>
     </div>
     <div class="details">
         <h3 class="status-goal">
-            <a href="/sdg-site-rwanda-demo/8">Decent work and economic growth</a>
+            <a href="/sdg-site-rwanda-demo/8">Decent jobs and economic growth</a>
         </h3>
-        <span class="total">16 indicators</span>
+        <span class="total">17 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">16</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">11</span></span><strong>Reported online</strong><span class="value">65%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">4</span></span><strong>Exploring data sources</strong><span class="value">24%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">2</span></span><strong>Not applicable</strong><span class="value">12%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:64.70588235294117%" title="Reported online: 65%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:23.52941176470588%" title="Exploring data sources: 24%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:11.76470588235294%" title="Not applicable: 12%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -600,25 +674,25 @@ data-event-label="high"
         </h3>
         <span class="total">12 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">12</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">5</span></span><strong>Reported online</strong><span class="value">42%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">6</span></span><strong>Exploring data sources</strong><span class="value">50%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">8%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:41.66666666666667%" title="Reported online: 42%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:50.0%" title="Exploring data sources: 50%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:8.333333333333332%" title="Not applicable: 8%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -632,61 +706,61 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/10">Reduced inequalities</a>
         </h3>
-        <span class="total">14 indicators</span>
+        <span class="total">11 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">14</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">3</span></span><strong>Reported online</strong><span class="value">27%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">6</span></span><strong>Exploring data sources</strong><span class="value">55%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">2</span></span><strong>Not applicable</strong><span class="value">18%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:27.27272727272727%" title="Reported online: 27%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:54.54545454545454%" title="Exploring data sources: 55%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:18.181818181818183%" title="Not applicable: 18%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
 </div><div class="goal reporting-status-item">
     <div class="frame goal-tiles">
         <a href="/sdg-site-rwanda-demo/11">
-        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/11.png" alt="Sustainable cities and communities - Goal 11" width="100" height="100" class="goal-icon-11 goal-icon-image goal-icon-image-"/>
+        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/11.png" alt="Sustainable cities &amp; communities - Goal 11" width="100" height="100" class="goal-icon-11 goal-icon-image goal-icon-image-"/>
         </a>
     </div>
     <div class="details">
         <h3 class="status-goal">
-            <a href="/sdg-site-rwanda-demo/11">Sustainable cities and communities</a>
+            <a href="/sdg-site-rwanda-demo/11">Sustainable cities & communities</a>
         </h3>
         <span class="total">15 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">15</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">5</span></span><strong>Reported online</strong><span class="value">33%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">9</span></span><strong>Exploring data sources</strong><span class="value">60%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">1</span></span><strong>Not applicable</strong><span class="value">7%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:33.33333333333333%" title="Reported online: 33%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:60.0%" title="Exploring data sources: 60%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:6.666666666666667%" title="Not applicable: 7%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -702,25 +776,25 @@ data-event-label="high"
         </h3>
         <span class="total">13 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">13</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">2</span></span><strong>Reported online</strong><span class="value">15%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">8</span></span><strong>Exploring data sources</strong><span class="value">62%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">3</span></span><strong>Not applicable</strong><span class="value">23%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:15.384615384615385%" title="Reported online: 15%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:61.53846153846154%" title="Exploring data sources: 62%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:23.076923076923077%" title="Not applicable: 23%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -736,25 +810,25 @@ data-event-label="high"
         </h3>
         <span class="total">8 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">8</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">4</span></span><strong>Reported online</strong><span class="value">50%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">2</span></span><strong>Exploring data sources</strong><span class="value">25%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">2</span></span><strong>Not applicable</strong><span class="value">25%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:50.0%" title="Reported online: 50%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:25.0%" title="Exploring data sources: 25%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:25.0%" title="Not applicable: 25%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -770,25 +844,25 @@ data-event-label="high"
         </h3>
         <span class="total">10 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">10</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">0</span></span><strong>Reported online</strong><span class="value">0%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">4</span></span><strong>Exploring data sources</strong><span class="value">40%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">6</span></span><strong>Not applicable</strong><span class="value">60%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:0.0%" title="Reported online: 0%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:40.0%" title="Exploring data sources: 40%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:60.0%" title="Not applicable: 60%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -804,59 +878,59 @@ data-event-label="high"
         </h3>
         <span class="total">14 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">14</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">4</span></span><strong>Reported online</strong><span class="value">29%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">7</span></span><strong>Exploring data sources</strong><span class="value">50%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">3</span></span><strong>Not applicable</strong><span class="value">21%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:28.57142857142857%" title="Reported online: 29%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:50.0%" title="Exploring data sources: 50%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:21.428571428571427%" title="Not applicable: 21%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
 </div><div class="goal reporting-status-item">
     <div class="frame goal-tiles">
         <a href="/sdg-site-rwanda-demo/16">
-        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/16.png" alt="Peace, justice and strong institutions - Goal 16" width="100" height="100" class="goal-icon-16 goal-icon-image goal-icon-image-"/>
+        <img src="https://open-sdg.org/sdg-translations/assets/img/goals/en/16.png" alt="Peace and justice - strong institutions - Goal 16" width="100" height="100" class="goal-icon-16 goal-icon-image goal-icon-image-"/>
         </a>
     </div>
     <div class="details">
         <h3 class="status-goal">
-            <a href="/sdg-site-rwanda-demo/16">Peace, justice and strong institutions</a>
+            <a href="/sdg-site-rwanda-demo/16">Peace and justice - strong institutions</a>
         </h3>
-        <span class="total">24 indicators</span>
+        <span class="total">23 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">24</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">13</span></span><strong>Reported online</strong><span class="value">57%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">10</span></span><strong>Exploring data sources</strong><span class="value">43%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">0</span></span><strong>Not applicable</strong><span class="value">0%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:56.52173913043478%" title="Reported online: 57%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:43.47826086956522%" title="Exploring data sources: 43%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:0.0%" title="Not applicable: 0%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -870,27 +944,27 @@ data-event-label="high"
         <h3 class="status-goal">
             <a href="/sdg-site-rwanda-demo/17">Partnerships for the goals</a>
         </h3>
-        <span class="total">24 indicators</span>
+        <span class="total">25 indicators</span>
         <div class="summary">
-            <div class="statuses">
-                
-                <div>
-                    <span class="status notstarted"><span class="status-inner">24</span></span><strong>Exploring data sources</strong><span class="value">100%</span>
-                </div>
-                
-                
-                <br style="clear:both;">
+            <div class="statuses"><div>
+                    <span class="status complete"><span class="status-inner">9</span></span><strong>Reported online</strong><span class="value">36%</span>
+                </div><div>
+                    <span class="status notstarted"><span class="status-inner">9</span></span><strong>Exploring data sources</strong><span class="value">36%</span>
+                </div><div>
+                    <span class="status notapplicable"><span class="status-inner">7</span></span><strong>Not applicable</strong><span class="value">28%</span>
+                </div><br style="clear:both;">
             </div>
         </div>
         <div class="goal-stats">
                 
                 
+                <span class="complete" style="width:36.0%" title="Reported online: 36%"></span>
                 
                 
-                <span class="notstarted" style="width:100.0%" title="Exploring data sources: 100%"></span>
+                <span class="notstarted" style="width:36.0%" title="Exploring data sources: 36%"></span>
                 
                 
-                </div>
+                <span class="notapplicable" style="width:28.0%" title="Not applicable: 28%"></span></div>
         <div class="divider"></div>
     </div>
     <br style="clear:both;">
@@ -903,87 +977,132 @@ data-event-label="high"
 
   
 
-  </div>
-  <a href="#top">Back to top</a>
+  <!---->
+
 </div>
 <footer role="contentinfo">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div id="footerLinks">
-                    <ul>
-                        <li>
-                            <a href="https://open-sdg.org">Built using Open SDG</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/sdg-site-rwanda-demo/contact-us">Contact us</a>
-                            
-                        </li>
-                        <li>
-                            
-                            <a href="https://twitter.com/MyTwitterAccount" target="_blank">Twitter</a>
-                            
-                        </li>
-                        <li>
-                            
-                            <a href="https://facebook.com/MyFacebookAccount" target="_blank">Facebook</a>
-                            
-                        </li>
-                        <li>
-                            <a href="/sdg-site-rwanda-demo/about/cookies-and-privacy/">Cookies</a>
-                            
-                        </li>
-                        
-                        
-                        
-                        <li>
-                            <a href="/sdg-site-rwanda-demo/config">Configuration</a>
-                        </li>
-                        </ul>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="footerLinks">
+          <ul>
+            <li><a href="https://open-sdg.org">Built using Open SDG</a></li>
+            
+              <li>
+                
+                  <a href="mailto:info@statistics.gov.rw" target="_blank">Contact us</a>
+                
+                </li>
+              <li>
+                
+                  <a href="https://twitter.com/statisticsRW" target="_blank">Twitter</a>
+                
+                </li>
+              <li>
+                <a href="/sdg-site-rwanda-demo/about/cookies-and-privacy/">Cookies</a>
+                
+                </li>
+              
+            
+            </ul>
         </div>
-        
+      </div>
     </div>
+  </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js" integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww==" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha256-Y26AMvaIfrZ1EQU49pf6H4QzVTrOI8m9wQYKkftBt4s=" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.js"></script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
-
-
-
-
-
-
-
 <script>translations['general'] = translations['general'] || {};
     translations['general']['hide'] = 'hide';</script>
 
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Search';</script>
 
-<script src='/sdg-site-rwanda-demo/assets/js/sdg.js?v=20220627091443'></script>
+<script src='/sdg-site-rwanda-demo/assets/js/sdg.js?v=20220627093401'></script>
+
+<script>
+$(function() {
+    if($('#indicatorData').length) {
+      var domData = $('#indicatorData').data();
+
+      if (domData.showdata) {
+
+        $('.async-loading').each(function(i, obj) {
+            $(obj).append($('<img />').attr('src', $(obj).data('img')).attr('alt', translations.indicator.loading));
+        });
+
+        var remoteUrl = '/comb/' + domData.id + '.json';
+        if (opensdg.remoteDataBaseUrl !== '/') {
+          remoteUrl = opensdg.remoteDataBaseUrl + remoteUrl;
+        }
+
+        $.ajax({
+          url: remoteUrl,
+          success: function(res) {
+
+            $('.async-loading').remove();
+            $('.async-loaded').show();
+
+            var model = new indicatorModel({
+              data: res.data,
+              edgesData: res.edges,
+              showMap: domData.showmap,
+              country: domData.country,
+              indicatorId: domData.indicatorid,
+              shortIndicatorId: domData.id,
+              chartTitle: domData.charttitle,
+              chartTitles: domData.charttitles,
+              measurementUnit: domData.measurementunit,
+              showData: domData.showdata,
+              graphType: domData.graphtype,
+              startValues: domData.startvalues,
+              graphLimits: domData.graphlimits,
+              stackedDisaggregation: domData.stackeddisaggregation,
+              graphAnnotations: domData.graphannotations,
+              indicatorDownloads: domData.indicatordownloads,
+              dataSchema: domData.dataschema,
+              compositeBreakdownLabel: domData.compositebreakdownlabel,
+              precision: domData.precision,
+            }),
+            view  = new indicatorView(model, {
+              rootElement: '#indicatorData',
+              legendElement: '#plotLegend',
+              decimalSeparator: '',
+              maxChartHeight: 420,
+              tableColumnDefs: [
+                { maxCharCount: 25 }, // nowrap
+                { maxCharCount: 35, width: 200 },
+                { maxCharCount: Infinity, width: 250 }
+              ]
+            }),
+            controller = new indicatorController(model, view);
+            controller.initialise();
+          }
+        });
+      }
+    }
+
+    var switcher = new accessibilitySwitcher();
 
 
-    
-    
-    <script src="/sdg-site-rwanda-demo/assets/js/custom.js?v=20220627091443"></script><script>
-    new indicatorInit();
-    new accessibilitySwitcher();
+});
 </script>
+
+
 
 
 </body>
 </html>
+
