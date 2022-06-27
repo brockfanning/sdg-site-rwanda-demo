@@ -44,16 +44,15 @@ create_indicators:
 create_goals:
   layout: goal-by-target
 create_pages:
-  pages:
-    - folder: /
-      layout: frontpage
-    - folder: /reporting-status
-      layout: reportingstatus
-    - filename: indicators.json
-      folder: /
-      layout: indicator-json
-    - folder: /search
-      layout: search
+  - folder: /
+    layout: frontpage
+  - folder: /reporting-status
+    layout: reportingstatus
+  - filename: indicators.json
+    folder: /
+    layout: indicator-json
+  - folder: /search
+    layout: search
 
 analytics:
   ga_prod: ''
