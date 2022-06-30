@@ -185,3 +185,7 @@ graph_color_set: accessible
 #    max_zoom: 10
 #    subfolder: my-geojson-subfolder
 #    label: My map layer label (can be a translation key)
+
+data_fields:
+  series: SERIES
+  units: UNIT_MEASURE
