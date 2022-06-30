@@ -1125,8 +1125,8 @@ var indicatorModel = function (options) {
   /**
  * Constants to be used in indicatorModel.js and helper functions.
  */
-var UNIT_COLUMN = 'Units';
-var SERIES_COLUMN = 'Series';
+var UNIT_COLUMN = 'UNIT_MEASURE';
+var SERIES_COLUMN = 'SERIES';
 var GEOCODE_COLUMN = 'GeoCode';
 var YEAR_COLUMN = 'Year';
 var VALUE_COLUMN = 'Value';
@@ -5485,8 +5485,8 @@ $(function() {
             this.form = null;
             this.currentDisaggregation = 0;
             this.displayedDisaggregation = 0;
-            this.seriesColumn = 'Series';
-            this.unitsColumn = 'Units';
+            this.seriesColumn = 'SERIES';
+            this.unitsColumn = 'UNIT_MEASURE';
             this.displayForm = null;
             this.updateDisaggregations();
         },
